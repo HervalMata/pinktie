@@ -38,25 +38,26 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Category $category
      * @return CategoryResource
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = Category::find($id);
         return new CategoryResource($category);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param CategoryRequest $request
+     * @param Category $category
+     * @return CategoryResource
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $category->fill($request->all());
+        $category->save();
+        return new CategoryResource($category);
     }
 
     /**
