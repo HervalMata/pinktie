@@ -36,11 +36,12 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return CategoryResource
      */
     public function show($id)
     {
-        //
+        $category = Category::find($id);
+        return new CategoryResource($category);
     }
 
     /**
