@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\CategoryFilter;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -17,9 +19,13 @@ class CategoryController extends Controller
      *
      * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(5);
+        /** @var CategoryFilter $filter */
+        $filter = app(CategoryFilter::class);
+        /** @var Builder $filterQuery */
+        $filterQuery = Category::filtered($filter);
+        $categories = $request->has('all') ? $filterQuery->get() : $filterQuery->paginate(5);
         return CategoryResource::collection($categories);
     }
 
