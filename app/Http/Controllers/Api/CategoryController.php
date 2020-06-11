@@ -73,4 +73,17 @@ class CategoryController extends Controller
         $category->delete();
         return response()->json([], 204);
     }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param Category $category
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function restore(Category $category)
+    {
+        $category->restore();
+        return response()->json([], 204);
+    }
 }
