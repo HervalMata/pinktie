@@ -21,5 +21,8 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::apiResources([
         'categories' => 'CategoryController'
     ]);
+    Route::apiResources([
+        'products' => 'ProductController'
+    ]);
 });
 
