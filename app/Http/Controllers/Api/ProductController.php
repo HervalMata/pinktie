@@ -8,9 +8,9 @@ use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
@@ -72,12 +72,25 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Product $product
-     * @return Response
+     * @return JsonResponse
      * @throws \Exception
      */
     public function destroy(Product $product)
     {
         $product->delete();
+        return response()->json([], 204);
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param Product $product
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function restore(Product $product)
+    {
+        $product->restore();
         return response()->json([], 204);
     }
 }
