@@ -15,7 +15,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'slug' => Str::slug($name),
         'product_code' => $faker->uuid,
         'description' => $faker->paragraph,
-        'quantity' =>$faker->randomNumber(),
+        'stock' =>$faker->randomNumber(),
         'price' => $faker->randomFloat(2, 1, 12),
         'category_id' => $categories->random()->first()
     ];
