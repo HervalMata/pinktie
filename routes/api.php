@@ -21,11 +21,18 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::apiResources([
         'categories' => 'CategoryController'
     ]);
+    Route::patch('categories/{category}/restore', 'CategoryController@restore');
     Route::apiResources([
         'products' => 'ProductController'
     ]);
+    Route::patch('products/{product}/restore', 'ProductController@restore');
     Route::apiResources([
         'colors' => 'ColorController'
+    ]);
+    Route::patch('colors/{color}/restore', 'ColorController@restore');
+    Route::apiResources([
+        'product.colors' => 'ProductColorController',
+        ['only' => ['index', 'store', 'destroy']]
     ]);
 });
 
