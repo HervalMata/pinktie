@@ -13,5 +13,5 @@ class Color extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['color_name'];
+    protected $fillable = ['color_name', 'slug'];
 }

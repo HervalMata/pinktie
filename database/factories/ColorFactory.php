@@ -4,9 +4,12 @@
 
 use App\Models\Color;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(Color::class, function (Faker $faker) {
+    $name = $faker->colorName;
     return [
-        'color_name' => $faker->colorName
+        'color_name' => $name,
+        'slug' => Str::slug($name)
     ];
 });
