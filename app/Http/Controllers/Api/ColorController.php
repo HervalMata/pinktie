@@ -10,6 +10,7 @@ use App\Models\Color;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 class ColorController extends Controller
 {
@@ -71,10 +72,11 @@ class ColorController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function destroy($id)
+    public function destroy(Color $color)
     {
-        //
+        $color->delete();
+        return response()->json([], 204);
     }
 }
