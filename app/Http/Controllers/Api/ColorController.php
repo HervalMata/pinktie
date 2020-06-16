@@ -56,13 +56,15 @@ class ColorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param ColorRequest $request
+     * @param Color $color
+     * @return ColorResource
      */
-    public function update(Request $request, $id)
+    public function update(ColorRequest $request, Color $color)
     {
-        //
+        $color->fill($request->all());
+        $color->save();
+        return new ColorResource($color);
     }
 
     /**
