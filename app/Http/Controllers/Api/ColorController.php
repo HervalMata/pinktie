@@ -3,18 +3,29 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\ColorFilter;
+use App\Http\Resources\ColorResource;
+use App\Models\Color;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ColorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        /** @var ColorFilter $filter */
+        $filter = app(ColorFilter::class);
+        /** @var Builder $filterQuery */
+        $filterQuery = Color::filtered($filter);
+        $colors = $request->has('all') ? $filterQuery->get() : $filterQuery->paginate(5);
+        return ColorResource::collection($colors);
     }
 
     /**
