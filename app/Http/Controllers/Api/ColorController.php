@@ -42,12 +42,12 @@ class ColorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Color $color
+     * @return ColorResource
      */
-    public function show($id)
+    public function show(Color $color)
     {
-        //
+        return new ColorResource($color);
     }
 
     /**
