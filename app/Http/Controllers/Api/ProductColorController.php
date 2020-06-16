@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductColorRequest;
 use App\Http\Resources\ProductColorResource;
+use App\Models\Color;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProductColorController extends Controller
@@ -16,5 +19,18 @@ class ProductColorController extends Controller
     public function index(Product $product)
     {
         return new ProductColorResource($product);
+    }
+
+    /**
+     * @param ProductColorRequest $request
+     * @param Product $product
+     * @return array|JsonResponse
+     */
+    public function store(ProductColorRequest $request, Product $product)
+    {
+        $changed = $product->colors()->sync($request->colors);
+        $colorsAttachedId = $changed['attached'];
+        $colors = Color::whereIn('id', $colorsAttachedId)->get();
+        return $colors->count() ? response()->json(new ProductColorResource($product), 201) : [];
     }
 }
