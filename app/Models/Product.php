@@ -12,7 +12,7 @@ class Product extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['product_name', 'product_code', 'description', 'quantity', 'price', 'active', 'category_id'];
+    protected $fillable = ['product_name', 'slug', 'product_code', 'description', 'quantity', 'price', 'active', 'category_id'];
 
     /**
      * @return BelongsTo
