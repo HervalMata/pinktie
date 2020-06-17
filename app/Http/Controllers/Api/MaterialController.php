@@ -3,18 +3,29 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\MaterialFilter;
+use App\Http\Resources\MaterialResource;
+use App\Models\Material;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class MaterialController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        /** @var MaterialFilter $filter */
+        $filter = app(MaterialFilter::class);
+        /** @var Builder $filterQuery */
+        $filterQuery = Material::filtered($filter);
+        $materials = $request->has('all') ? $filterQuery->get() : $filterQuery->paginate(5);
+        return MaterialResource::collection($materials);
     }
 
     /**
