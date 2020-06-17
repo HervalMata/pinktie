@@ -30,9 +30,9 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
         'colors' => 'ColorController'
     ]);
     Route::patch('colors/{color}/restore', 'ColorController@restore');
-    Route::apiResources([
-        'product.colors' => 'ProductColorController',
+    Route::resource(
+        'product.colors' ,'ProductColorController',
         ['only' => ['index', 'store', 'destroy']]
-    ]);
+    );
 });
 
