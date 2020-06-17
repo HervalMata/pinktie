@@ -8,7 +8,6 @@ use App\Http\Resources\ProductMaterialResource;
 use App\Models\Material;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ProductMaterialController extends Controller
 {
