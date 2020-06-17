@@ -19,35 +19,38 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::name('login')->post('login', 'AuthController@login');
-    Route::apiResources([
-        'categories' => 'CategoryController'
-    ]);
-    Route::patch('categories/{category}/restore', 'CategoryController@restore');
-    Route::apiResources([
-        'products' => 'ProductController'
-    ]);
-    Route::patch('products/{product}/restore', 'ProductController@restore');
-    Route::apiResources([
-        'colors' => 'ColorController'
-    ]);
-    Route::patch('colors/{color}/restore', 'ColorController@restore');
-    Route::resource(
-        'product.colors' ,'ProductColorController',
-        ['only' => ['index', 'store', 'destroy']]
-    );
-    Route::apiResources([
-        'materials' => 'MaterialController'
-    ]);
-    Route::patch('materials/{material}/restore', 'MaterialController@restore');
-    Route::resource(
-        'product.materials' ,'ProductMaterialController',
-        ['only' => ['index', 'store', 'destroy']]
-    );
-    Route::apiResources([
-        'products.photos' => 'ProductPhotoController'
-    ]);
-    Route::apiResources([
-        'users' => 'UserController'
-    ]);
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::name('logout')->post('logout', 'AuthController@logout');
+        Route::apiResources([
+            'categories' => 'CategoryController'
+        ]);
+        Route::patch('categories/{category}/restore', 'CategoryController@restore');
+        Route::apiResources([
+            'products' => 'ProductController'
+        ]);
+        Route::patch('products/{product}/restore', 'ProductController@restore');
+        Route::apiResources([
+            'colors' => 'ColorController'
+        ]);
+        Route::patch('colors/{color}/restore', 'ColorController@restore');
+        Route::resource(
+            'product.colors' ,'ProductColorController',
+            ['only' => ['index', 'store', 'destroy']]
+        );
+        Route::apiResources([
+            'materials' => 'MaterialController'
+        ]);
+        Route::patch('materials/{material}/restore', 'MaterialController@restore');
+        Route::resource(
+            'product.materials' ,'ProductMaterialController',
+            ['only' => ['index', 'store', 'destroy']]
+        );
+        Route::apiResources([
+            'products.photos' => 'ProductPhotoController'
+        ]);
+        Route::apiResources([
+            'users' => 'UserController'
+        ]);
+    });
 });
 
