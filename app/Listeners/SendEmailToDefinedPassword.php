@@ -10,6 +10,7 @@ namespace App\Listeners;
 
 
 use App\Events\UserCreatedEvent;
+use App\Notifications\MyResetPassword;
 use Illuminate\Support\Facades\Password;
 
 class SendEmailToDefinedPassword
@@ -28,6 +29,7 @@ class SendEmailToDefinedPassword
     {
         $user = $event->getUser();
         $token = Password::broker()->createToken($user);
-        $user->sendPasswordResetNotification($token);
+        $user->notify(new MyResetPassword($token));
+        //$user->sendPasswordResetNotification($token);
     }
 }
