@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductPhoto extends Model
 {
@@ -42,5 +43,12 @@ class ProductPhoto extends Model
     {
         $dir = self::DIR_PRODUCTS;
         return "{$dir}/{$product_id}";
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function product() {
+        return $this->belongsTo(Product::class);
     }
 }

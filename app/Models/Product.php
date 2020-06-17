@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Mnabialek\LaravelEloquentFilter\Traits\Filterable;
 
@@ -39,5 +40,13 @@ class Product extends Model
     public function materials()
     {
         return $this->belongsToMany(Material::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function photos()
+    {
+        return $this->hasMany(ProductPhoto::class);
     }
 }
