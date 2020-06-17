@@ -96,6 +96,7 @@ class ProductPhotosSeeder extends Seeder
     {
         $photoFile = $this->allFakerPhotos->random();
         $uploadFile = new UploadedFile($photoFile->getRealPath(), Str::random(16) . '.' . $photoFile->getExtension());
+        ProductPhoto::uploadFiles($product_id, [$uploadFile]);
         return $uploadFile->hashName();
     }
 }

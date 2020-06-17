@@ -21,4 +21,26 @@ class ProductPhoto extends Model
         $path = self::PRODUCTS_PATH;
         return storage_path("{$path}/{$productid}");
     }
+
+    /**
+     * @param $product_id
+     * @param array $files
+     */
+    public static function uploadFiles($product_id, array $files)
+    {
+        $dir = self::photosDir($product_id);
+        foreach ($files as $file) {
+            $file->store($dir, ['disk' => 'public']);
+        }
+    }
+
+    /**
+     * @param $product_id
+     * @return string
+     */
+    public static function photosDir($product_id)
+    {
+        $dir = self::DIR_PRODUCTS;
+        return "{$dir}/{$product_id}";
+    }
 }
