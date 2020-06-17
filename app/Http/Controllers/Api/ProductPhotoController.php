@@ -8,6 +8,7 @@ use App\Http\Resources\ProductPhotoCollection;
 use App\Http\Resources\ProductPhotoResource;
 use App\Models\Product;
 use App\Models\ProductPhoto;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ProductPhotoController extends Controller
@@ -43,7 +44,7 @@ class ProductPhotoController extends Controller
      */
     public function show(Product $product, ProductPhoto $photo)
     {
-        $this->assertProductPhoto($photo, $product);
+        $this->assertProductPhoto($product, $photo);
         return new ProductPhotoResource($photo);
     }
 
@@ -57,7 +58,7 @@ class ProductPhotoController extends Controller
      */
     public function update(ProductPhotoRequest $request, Product $product, ProductPhoto $photo)
     {
-        $this->assertProductPhoto($photo, $product);
+        $this->assertProductPhoto($product, $photo);
         $photo = $photo->updateWithPhoto($request->photo);
         return new ProductPhotoResource($photo);
     }
@@ -65,15 +66,18 @@ class ProductPhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @param ProductPhoto $photo
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Product $product, ProductPhoto $photo)
     {
-        //
+        $this->assertProductPhoto($product, $photo);
+        $photo->deleteWithPhoto();
+        return response()->json([], 204);
     }
 
-    private function assertProductPhoto(ProductPhoto $photo, Product $product)
+    private function assertProductPhoto(Product $product, ProductPhoto $photo)
     {
         if ($photo->product_id != $product->id) {
             abort(404);

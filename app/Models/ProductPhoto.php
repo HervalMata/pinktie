@@ -148,4 +148,22 @@ class ProductPhoto extends Model
         $dir = self::photosDir($this->product_id);
         Storage::disk('public')->delete("{$dir}/{$fileName}");
     }
+
+    /**
+     * @return bool
+     * @throws \Exception
+     */
+    public function deleteWithPhoto() : bool
+    {
+        try {
+            Db::beginTransaction();
+            $this->deletePhoto($this->file_name);
+            $result = $this->delete();
+            DB::commit();
+            return $result;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
 }
