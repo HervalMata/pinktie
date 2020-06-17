@@ -42,12 +42,12 @@ class MaterialController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Material $material
+     * @return MaterialResource
      */
-    public function show($id)
+    public function show(Material $material)
     {
-        //
+        return new MaterialResource($material);
     }
 
     /**
