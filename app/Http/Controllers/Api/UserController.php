@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\UserCreatedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Filters\UserFilter;
 use App\Http\Requests\UserRequest;
@@ -39,6 +40,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = User::create($request->all());
+        event(new UserCreatedEvent($user));
         return new UserResource($user);
     }
 
