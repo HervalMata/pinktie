@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @param array $attributes
+     * @return mixed
+     */
+    public static function createCustom($attributes = array())
+    {
+        !isset($attributes['password']) ? : $attributes['password'] = bcrypt($attributes['password']);
+        return parent::create($attributes);
+    }
 }
