@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Collection;
 
 class ProductPhoto extends Model
 {
@@ -43,6 +45,30 @@ class ProductPhoto extends Model
     {
         $dir = self::DIR_PRODUCTS;
         return "{$dir}/{$product_id}";
+    }
+
+    public static function createWithPhotoFiles(int $productId, array $files) : Collection
+    {
+        self::uploadFiles($productId, $files);
+        $photos = self::createPhotosModel($productId, $files);
+        return new Collection($photos);
+    }
+
+    private static function createPhotosModel(int $productId, array $files) : array
+    {
+        $photos = [];
+        foreach ($files as $file) {
+            $photos[] = self::create([
+                'file_name' => $file->hashName(),
+                'product_id' => $productId
+            ]);
+            return $photos;
+        }
+    }
+
+    public function getPhotoUrlAttribute() {
+        $path = self::photosDir($this->product_id);
+        return asset("storage/{$path}/{$this->file_name}");
     }
 
     /**
