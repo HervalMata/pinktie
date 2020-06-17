@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Filters\MaterialFilter;
+use App\Http\Requests\MaterialRequest;
 use App\Http\Resources\MaterialResource;
 use App\Models\Material;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,12 +32,14 @@ class MaterialController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param MaterialRequest $request
+     * @return MaterialResource
      */
-    public function store(Request $request)
+    public function store(MaterialRequest $request)
     {
-        //
+        $material = Material::create($request->all());
+        $material->refresh();
+        return new MaterialResource($material);
     }
 
     /**
