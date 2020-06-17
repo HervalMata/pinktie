@@ -45,5 +45,8 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::apiResources([
         'products.photos' => 'ProductPhotoController'
     ]);
+    Route::apiResources([
+        'users' => 'UserController'
+    ]);
 });
 
