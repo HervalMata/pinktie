@@ -54,6 +54,7 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
         Route::apiResources([
             'users' => 'UserController'
         ]);
+        Route::patch('profile', 'UserProfileController@update');
     });
 });
 
