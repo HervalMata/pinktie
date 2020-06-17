@@ -34,5 +34,9 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
         'product.colors' ,'ProductColorController',
         ['only' => ['index', 'store', 'destroy']]
     );
+    Route::apiResources([
+        'materials' => 'MaterialController'
+    ]);
+    Route::patch('materials/{material}/restore', 'MaterialController@restore');
 });
 
