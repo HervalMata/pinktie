@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductCitiesTable extends Migration
+class CreateEstadoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateProductCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_cities', function (Blueprint $table) {
+        Schema::create('estados', function (Blueprint $table) {
             $table->id();
-            $table->string('cidade');
-            $table->unsignedBigInteger('state_id');
-            $table->foreign('state_id')->references('id')->on('states');
+            $table->string('estado');
+            $table->string('sigla');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateProductCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_cities');
+        Schema::dropIfExists('estados');
     }
 }

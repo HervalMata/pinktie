@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class StatesTableSeeder extends Seeder
+class EstadoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class StatesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('states')->insert([
+        DB::table('estados')->insert([
             ['estado' => 'Acre', 'sigla' => 'AC'],
             ['estado' => 'Alagoas', 'sigla' => 'AL'],
             ['estado' => 'Amapá', 'sigla' => 'AP'],
