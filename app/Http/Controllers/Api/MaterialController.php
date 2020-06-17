@@ -56,13 +56,15 @@ class MaterialController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param MaterialRequest $request
+     * @param Material $material
+     * @return MaterialResource
      */
-    public function update(Request $request, $id)
+    public function update(MaterialRequest $request, Material $material)
     {
-        //
+        $material->fill($request->all());
+        $material->save();
+        return new MaterialResource($material);
     }
 
     /**
