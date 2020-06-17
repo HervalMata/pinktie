@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Filters\ProductFilter;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\JsonResponse;
@@ -27,6 +28,16 @@ class ProductController extends Controller
         /** @var Builder $filterQuery */
         $filterQuery = Product::with('category', 'colors')->filtered($filter);
         $products = $request->has('all') ? $filterQuery->get() : $filterQuery->paginate(10);
+        return ProductResource::collection($products);
+    }
+
+    /**
+     * @param Category $category
+     * @return AnonymousResourceCollection
+     */
+    public function productsByCategory(Category $category)
+    {
+        $products = Product::where('category_id', $category->id)->get();
         return ProductResource::collection($products);
     }
 
