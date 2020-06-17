@@ -42,5 +42,8 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
         'product.materials' ,'ProductMaterialController',
         ['only' => ['index', 'store', 'destroy']]
     );
+    Route::apiResources([
+        'products.photos' => 'ProductPhotoController'
+    ]);
 });
 
