@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +13,9 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
     use SoftDeletes;
+
+    const ROLE_SELLER = 1;
+    const ROLE_CUSTOMER = 2;
 
     protected $dates = ['deleted_at'];
 
@@ -69,5 +73,13 @@ class User extends Authenticatable implements JWTSubject
             'email' => $this->email,
             'name' => $this->name
         ];
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
     }
 }
