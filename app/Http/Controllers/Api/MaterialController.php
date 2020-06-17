@@ -80,4 +80,17 @@ class MaterialController extends Controller
         $material->delete();
         return response()->json([], 204);
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Material $material
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function restore(Material $material)
+    {
+        $material->restore();
+        return response()->json([], 204);
+    }
 }
