@@ -79,4 +79,17 @@ class UserController extends Controller
         $user->delete();
         return response()->json([], 204);
     }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param User $user
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function restore(User $user)
+    {
+        $user->restore();
+        return response()->json([], 204);
+    }
 }
