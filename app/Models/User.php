@@ -3,12 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -41,9 +45,9 @@ class User extends Authenticatable
      * @param array $attributes
      * @return mixed
      */
-    public static function createCustom($attributes = array())
+    public function fill(array $attributes)
     {
         !isset($attributes['password']) ? : $attributes['password'] = bcrypt($attributes['password']);
-        return parent::create($attributes);
+        return parent::fill($attributes);
     }
 }
