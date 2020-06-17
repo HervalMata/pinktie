@@ -12,7 +12,7 @@ class StatesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('estados')->insert([
+        DB::table('states')->insert([
             ['estado' => 'Acre', 'sigla' => 'AC'],
             ['estado' => 'Alagoas', 'sigla' => 'AL'],
             ['estado' => 'Amapá', 'sigla' => 'AP'],
