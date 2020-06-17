@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductPhotoRequest;
 use App\Http\Resources\ProductPhotoCollection;
 use App\Http\Resources\ProductPhotoResource;
 use App\Models\Product;
@@ -24,10 +25,11 @@ class ProductPhotoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ProductPhotoRequest $request
+     * @param Product $product
+     * @return void
      */
-    public function store(Request $request, Product $product)
+    public function store(ProductPhotoRequest $request, Product $product)
     {
         ProductPhoto::createWithPhotoFiles($product->id, $request->photos);
     }
@@ -41,22 +43,23 @@ class ProductPhotoController extends Controller
      */
     public function show(Product $product, ProductPhoto $photo)
     {
-        if ($photo->product_id != $product->id) {
-            abort(404);
-        }
+        $this->assertProductPhoto($photo, $product);
         return new ProductPhotoResource($photo);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param ProductPhotoRequest $request
+     * @param Product $product
+     * @param ProductPhoto $photo
+     * @return ProductPhotoResource
      */
-    public function update(Request $request, $id)
+    public function update(ProductPhotoRequest $request, Product $product, ProductPhoto $photo)
     {
-        //
+        $this->assertProductPhoto($photo, $product);
+        $photo = $photo->updateWithPhoto($request->photo);
+        return new ProductPhotoResource($photo);
     }
 
     /**
@@ -68,5 +71,12 @@ class ProductPhotoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function assertProductPhoto(ProductPhoto $photo, Product $product)
+    {
+        if ($photo->product_id != $product->id) {
+            abort(404);
+        }
     }
 }
