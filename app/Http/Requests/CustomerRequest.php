@@ -26,7 +26,6 @@ class CustomerRequest extends FormRequest
         return [
             'name' => 'required|max:50',
             'email'=> 'required|email|unique:users,email',
-            'password' => 'required|min:4|max:16',
             'photo' => 'image|max:' . (3 *2014),
             'cidade_id' => 'required|exists:cidade,id',
             'address' =>    'required',

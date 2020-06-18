@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -48,6 +49,43 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     /**
+     * @param array $data
+     * @return User
+     * @throws \Exception
+     */
+    public static function createCustomer(array $data) : User
+    {
+        try {
+            if (isset($data['photo'])) {
+                UserProfile::uploadPhoto($data['photo']);
+            }
+            DB::beginTransaction();
+            $user = self::createCustomerUser($data);
+            UserProfile::saveProfile($user, $data);
+            DB::commit();
+        } catch (\Exception $e) {
+            if (isset($data['photo'])) {
+                UserProfile::deleteFile($data['photo']);
+            }
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * @param array $data
+     * @return User
+     */
+    private static function createCustomerUser(array $data) : User
+    {
+        $data['password'] = bcrypt(Str::random(16));
+        $user = User::create($data);
+        $user->role = user::ROLE_CUSTOMER;
+        $user->save();
+        return $user;
+    }
+
+    /**
      * @param array $attributes
      * @return mixed
      */
@@ -57,6 +95,11 @@ class User extends Authenticatable implements JWTSubject
         return parent::fill($attributes);
     }
 
+    /**
+     * @param array $data
+     * @return User
+     * @throws \Exception
+     */
     public function updateWithProfile(array $data) : User
     {
         try {
@@ -97,6 +140,14 @@ class User extends Authenticatable implements JWTSubject
             'profile' => [
                 'has_photo' => $this->profile->photo ? true : false,
                 'photo_url' => $this->profile->photo_url,
+                'address' => $this->address,
+                'additional' => $this->additional,
+                'province' => $this->province,
+                'telefone' => $this->telefone,
+                'mobile' => $this->mobile,
+                'cpf' => $this->cpf,
+                'cidade' => $this->cidade->cidade,
+                'estado' => $this->cidade->estado
             ]
         ];
     }
