@@ -23,6 +23,18 @@ class UserProfile extends Model
         return storage_path($path);
     }
 
+    public static function uploadPhoto($photo)
+    {
+    }
+
+    public static function saveProfile(User $param, array $data)
+    {
+    }
+
+    public static function deletePhoto($photo)
+    {
+    }
+
     /**
      * @return BelongsTo
      */

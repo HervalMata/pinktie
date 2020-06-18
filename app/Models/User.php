@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -56,6 +57,26 @@ class User extends Authenticatable implements JWTSubject
         return parent::fill($attributes);
     }
 
+    public function updateWithProfile(array $data) : User
+    {
+        try {
+            if (isset($data['photo'])) {
+                UserProfile::uploadPhoto($data['photo']);
+            }
+            DB::beginTransaction();
+            $this->fill($data);
+            $this->save();
+            UserProfile::saveProfile($this, $data);
+            DB::commit();
+        } catch (\Exception $e) {
+            if (isset($data['photo'])) {
+                UserProfile::deletePhoto($data['photo']);
+            }
+            DB::rollBack();
+            throw $e;
+        }
+    }
+
     /**
      * @return mixed
      */
@@ -71,7 +92,12 @@ class User extends Authenticatable implements JWTSubject
     {
         return [
             'email' => $this->email,
-            'name' => $this->name
+            'name' => $this->name,
+            'role' => $this->role,
+            'profile' => [
+                'has_photo' => $this->profile->photo ? true : false,
+                'photo_url' => $this->profile->photo_url,
+            ]
         ];
     }
 
