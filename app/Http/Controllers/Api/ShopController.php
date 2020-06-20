@@ -11,6 +11,18 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class ShopController extends Controller
 {
+
+    /**
+     * @return AnonymousResourceCollection
+     */
+    public function productListing()
+    {
+        $products = Product::where('active', true)
+            ->where('stock', '>', 0)
+            ->get();
+        return ProductResource::collection($products);
+    }
+
     /**
      * @param Category $category
      * @return AnonymousResourceCollection
