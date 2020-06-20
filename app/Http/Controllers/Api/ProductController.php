@@ -32,16 +32,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Category $category
-     * @return AnonymousResourceCollection
-     */
-    public function productsByCategory(Category $category)
-    {
-        $products = Product::where('category_id', $category->id)->get();
-        return ProductResource::collection($products);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param ProductRequest $request
