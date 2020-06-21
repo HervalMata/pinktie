@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CartRequest;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Resources\CartItemCollection;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Validator;
 
 class CartController extends Controller
 {
@@ -34,6 +36,27 @@ class CartController extends Controller
             'token' => $cart->id,
             'key' => $cart->key
         ], 201);
+    }
+
+    /**
+     * @param Request $request
+     * @param Cart $cart
+     * @return JsonResponse
+     */
+    public function show(Request $request, Cart $cart)
+    {
+        $validator = Validator::make($request->all(), ['key' => 'required']);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+        $key = $request->input('key');
+        if ($cart->key == $key) {
+            return response()->json(['cart' => $cart->id, 'Items in cart' => new CartItemCollection($cart->items)], 200);
+        } else {
+            return response()->json([
+                'message' => 'O Carrinho de compras é inválido'
+            ], 400);
+        }
     }
 
 
