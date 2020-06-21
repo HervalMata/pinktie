@@ -59,6 +59,29 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param Cart $cart
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(Request $request, Cart $cart)
+    {
+        $validator = Validator::make($request->all(), ['key' => 'required']);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+        $key = $request->input('key');
+        if ($cart->key == $key) {
+            $cart->delete();
+            return response()->json(null, 204);
+        } else {
+            return response()->json([
+                'message' => 'O Carrinho de compras é inválido'
+            ], 400);
+        }
+    }
+
 
     /**
      * @param CartRequest $request
