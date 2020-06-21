@@ -26,7 +26,7 @@ class ProductController extends Controller
         /** @var ProductFilter $filter */
         $filter = app(ProductFilter::class);
         /** @var Builder $filterQuery */
-        $filterQuery = Product::with('category', 'colors')->filtered($filter);
+        $filterQuery = Product::with('categories', 'colors')->filtered($filter);
         $products = $request->has('all') ? $filterQuery->get() : $filterQuery->paginate(10);
         return ProductResource::collection($products);
     }

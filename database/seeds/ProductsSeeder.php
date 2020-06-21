@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Color;
 use App\Models\Material;
 use App\Models\Product;

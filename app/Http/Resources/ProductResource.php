@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -14,6 +16,8 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
+        $category_id = $this->category_id;
+        $category = Category::find($category_id);
         return [
             'product_name' => $this->product_name,
             'slug' => $this->slug,
@@ -24,7 +28,7 @@ class ProductResource extends JsonResource
             'active' => (bool) $this->active,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'category' => new CategoryResource($this->category)
+            'category' => new CategoryResource($category)
         ];
     }
 }

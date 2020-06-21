@@ -15,9 +15,9 @@ class ShopController extends Controller
     /**
      * @return AnonymousResourceCollection
      */
-    public function productListing()
+    public function productsListing()
     {
-        $products = Product::where('active', true)
+        $products = Product::with('categories')->where('active','=', true)
             ->where('stock', '>', 0)
             ->get();
         return ProductResource::collection($products);
@@ -34,5 +34,14 @@ class ShopController extends Controller
             ->where('category_id', $category->id)
             ->get();
         return ProductResource::collection($products);
+    }
+
+    /**
+     * @param Product $product
+     * @return ProductResource
+     */
+    public function productDetail(Product $product)
+    {
+        return new ProductResource($product);
     }
 }

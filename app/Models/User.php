@@ -113,11 +113,12 @@ class User extends Authenticatable implements JWTSubject
             DB::commit();
         } catch (\Exception $e) {
             if (isset($data['photo'])) {
-                UserProfile::deletePhoto($data['photo']);
+                UserProfile::deleteFile($data['photo']);
             }
             DB::rollBack();
             throw $e;
         }
+        return $this;
     }
 
     /**
@@ -157,6 +158,6 @@ class User extends Authenticatable implements JWTSubject
      */
     public function profile()
     {
-        return $this->hasOne(UserProfile::class);
+        return $this->hasOne(UserProfile::class)->withDefault();
     }
 }
