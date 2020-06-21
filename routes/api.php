@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::get('shop/product/category/{category}', 'ShopController@productsRecommended');
     Route::get('shop/product/featured', 'ShopController@productsFeatured');
     Route::post('carts/{cart}', 'CartController@addProducts');
+    Route::post('carts/checkout', 'CartController@checkout');
     Route::apiResources([
         'carts' => 'CartController'
     ]);
