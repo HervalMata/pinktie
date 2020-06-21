@@ -17,6 +17,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'product_code' => $faker->uuid,
         'description' => $faker->paragraph,
         'stock' =>$faker->numberBetween(1, 10),
+        'featured' =>$faker->numberBetween(0, 1),
         'price' => $faker->randomFloat(2, 1, 12),
         'category_id' => $category->id
     ];

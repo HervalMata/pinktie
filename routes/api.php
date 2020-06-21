@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::get('shop', 'ShopController@productsListing');
     Route::get('shop/{product}', 'ShopController@productDetail');
     Route::get('shop/product/category/{category}', 'ShopController@productsRecommended');
+    Route::get('shop/product/featured', 'ShopController@productsFeatured');
     Route::resource('customers', 'CustomerController', ['only' => ['store', 'update']]);
     Route::group(['middleware' => 'auth:api', 'jwt.refresh'], function () {
         Route::name('me')->post('me', 'AuthController@me');

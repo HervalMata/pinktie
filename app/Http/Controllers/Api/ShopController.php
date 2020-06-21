@@ -61,4 +61,15 @@ class ShopController extends Controller
             ->get();
         return ProductResource::collection($products);
     }
+
+    /**
+     * @return AnonymousResourceCollection
+     */
+    public function productsFeatured()
+    {
+        $products = Product::with('categories')->where('active','=', true)
+            ->where('stock', '>', 0)->where('featured', '=', true)
+            ->take(5)->get();
+        return ProductResource::collection($products);
+    }
 }
