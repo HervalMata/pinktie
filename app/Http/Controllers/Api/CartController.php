@@ -11,9 +11,32 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    /**
+     * @param CartRequest $request
+     * @return JsonResponse
+     */
+    public function store(CartRequest $request)
+    {
+        if (Auth::guard('api')->check()) {
+            $user_id = \auth('api')->user()->getKey();
+        }
+        $cart = Cart::create([
+            'id' => md5(uniqid(rand(), true)),
+            'key' => md5(uniqid(rand(), true)),
+            'user_id' => isset($user_id) ? $user_id : null,
+        ]);
+        return response()->json([
+            'Message' => 'Um novo carrinho de compras foi criado por você',
+            'token' => $cart->id,
+            'key' => $cart->key
+        ], 201);
+    }
+
+
     /**
      * @param CartRequest $request
      * @param Cart $cart
