@@ -42,6 +42,23 @@ class ShopController extends Controller
      */
     public function productDetail(Product $product)
     {
+        $category_id = $product->categories()->id;
+        $category = Category::find($category_id);
+        $this->productsRecommended($category);
         return new ProductResource($product);
+    }
+
+    /**
+     * @param Category $category
+     * @return AnonymousResourceCollection
+     */
+    public function productsRecommended(Category $category)
+    {
+        $products = Product::where('active', true)
+            ->where('stock', '>', 0)
+            ->where('category_id', $category->id)
+            ->take(5)
+            ->get();
+        return ProductResource::collection($products);
     }
 }
