@@ -3,10 +3,9 @@
 namespace App\Http\Resources;
 
 use App\Models\Cidade;
-use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OrderResource extends JsonResource
+class UserOrderResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +15,10 @@ class OrderResource extends JsonResource
      */
     public function toArray($request)
     {
-        $user = User::find($this->user_id);
         $cidade = Cidade::find($this->cidade_id);
         return [
-            'user' => new UserResource($user),
             'products' => $this->products,
             'totalPrice' => (float) $this->totalPrice,
-            'name' => $this->name,
             'address' => $this->address,
             'cidade' => $cidade,
             'country' => $this->country,
