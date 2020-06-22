@@ -65,6 +65,9 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
             'users' => 'UserController'
         ]);
         Route::patch('profile', 'UserProfileController@update');
+        Route::apiResources([
+            'orders' => 'OrderController'
+        ]);
     });
 });
 
