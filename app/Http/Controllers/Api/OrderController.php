@@ -27,4 +27,16 @@ class OrderController extends Controller
     {
         return new OrderResource($order);
     }
+
+    /**
+     * @param Request $request
+     * @param Order $order
+     * @return OrderResource
+     */
+    public function update(Request $request, Order $order)
+    {
+        $order->fiil($request->only('orderStatus'));
+        $order->save();
+        return new OrderResource($order);
+    }
 }
