@@ -15,6 +15,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
+use PagSeguro\Services\DirectPayment\CreditCard;
+use Ramsey\Uuid\Uuid;
 
 class CartController extends Controller
 {
@@ -146,6 +148,7 @@ class CartController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
+        $this->makePagSeguroSession();
         $key = $request->input('key');
         if ($cart->key == $key) {
             $name = $request->input('name');
@@ -155,6 +158,7 @@ class CartController extends Controller
             $cidade_id = $request->input('cidade_id');
             $province = $request->input('province');
             $country = $request->input('country');
+            $cep = $request->input('cep');
             $cpf = $request->input('cpf');
             $telefone = $request->input('telefone');
             $mobile = $request->input('mobile');
@@ -190,6 +194,7 @@ class CartController extends Controller
                     'cidade_id' => $cidade_id,
                     'province' => $province,
                     'country' => $country,
+                    'cep' => $cep,
                     'cpf' => $cpf,
                     'telefone' => $telefone,
                     'mobile' => $mobile,
@@ -207,5 +212,50 @@ class CartController extends Controller
                 'message' => 'O Carrinho de compras é inválido'
             ], 400);
         }
+    }
+
+    public function proccess(Request $request, Cart $cart)
+    {
+        try {
+            $dataPost = $request->all();
+            $user = \auth()->user();
+            $cartItems = $cart->items;
+            $reference = Uuid::uuid4();
+            $creditCardPayment = new CreditCard($cartItems, $user, $dataPost, $reference);
+            $result = $creditCardPayment->doPayment();
+            $userOrder = [
+                'reference' => $reference,
+                'pagseguro_code' => $result->getCode(),
+                'pagamento_status' => $result->getStatus(),
+                'items' => serialize($cartItems)
+            ];
+            $user->orders()->create($userOrder);
+            return response()->json([
+                'data' => [
+                    'status' => true,
+                    'message' => 'Ordem criada com sucesso',
+                    'order' => $reference
+                ]
+            ]);
+        } catch (\Exception $e) {
+            $message = env('APP_DEBUG') ? simplexml_load_string($e->getMessage()) : 'Erro ao processar a requisição';
+            return response()->json([
+                'data' => [
+                    'status' => true,
+                    'message' => $message
+                ]
+            ], 401);
+        }
+    }
+
+    private function makePagSeguroSession()
+    {
+        if (!session()->has('pagseguro_session_code'))
+        {
+            $sessionCode = \PagSeguro\Services\Session::create(
+                \PagSeguro\Configuration\Configure::getAccountCredentials()
+            );
+        }
+        session()->put('pagseguro_session_code', $sessionCode->getResult());
     }
 }
