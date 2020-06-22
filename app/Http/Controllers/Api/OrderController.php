@@ -18,4 +18,13 @@ class OrderController extends Controller
         $orders = Order::with('cities', 'users')->paginate(10);
         return OrderResource::collection($orders);
     }
+
+    /**
+     * @param Order $order
+     * @return OrderResource
+     */
+    public function show(Order $order)
+    {
+        return new OrderResource($order);
+    }
 }
