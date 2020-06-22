@@ -10,12 +10,13 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\Product;
+use App\Payment\PagSeguro\CreditCard;
+use App\Payment\PagSeguro\Notification;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Validator;
-use PagSeguro\Services\DirectPayment\CreditCard;
 use Ramsey\Uuid\Uuid;
 
 class CartController extends Controller
@@ -214,6 +215,11 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param Cart $cart
+     * @return JsonResponse
+     */
     public function proccess(Request $request, Cart $cart)
     {
         try {
@@ -248,6 +254,34 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * @return JsonResponse
+     */
+    public function notification()
+    {
+        try {
+            $notification = new Notification();
+            $notification = $notification->getTransaction();
+            $reference = base64_decode($notification->getReference());
+            $userOrder = Order::whereReference($reference);
+            $userOrder->update([
+                'pagseguro_status' => $notification->getStaus()
+            ]);
+            if ($notification->getStatus() === 3) {
+
+            }
+            return response()->json([], 204);
+        } catch (\Exception $e) {
+            $message = env('APP_DEBUG') ? $e->getMessage() : '';
+            return response()->json([
+                'error' => $message
+            ], 500);
+        }
+    }
+
+    /**
+     * @throws \Exception
+     */
     private function makePagSeguroSession()
     {
         if (!session()->has('pagseguro_session_code'))
