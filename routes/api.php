@@ -70,6 +70,9 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
         Route::apiResources([
             'orders' => 'OrderController'
         ]);
+        Route::apiResources([
+            'coupons' => 'CouponController'
+        ]);
     });
 });
 
