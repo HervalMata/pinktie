@@ -24,6 +24,7 @@ class CreateUserProfileTable extends Migration
             $table->string('number');
             $table->string('additional')->nullable();
             $table->string('province');
+            $table->string('cep');
             $table->string('cpf');
             $table->string('photo')->nullable();
             $table->string('telefone')->nullable();

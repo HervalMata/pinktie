@@ -25,10 +25,12 @@ class CreateOrdersTable extends Migration
             $table->string('number');
             $table->string('additional')->nullable();
             $table->string('province');
+            $table->string('cep');
             $table->string('cpf');
             $table->string('telefone')->nullable();
             $table->string('mobile');
             $table->string('trasanctionID');
+            $table->tinyInteger('orderStatus')->default(1);
             $table->timestamps();
         });
     }
