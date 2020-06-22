@@ -24,4 +24,14 @@ class UserOrderController extends Controller
         return UserOrderResource::collection($orders);
     }
 
+    /**
+     * @param Order $order
+     * @return UserOrderResource
+     */
+    public function orderByUser(Order $order)
+    {
+        if (Auth::guard('api')->check()) {
+            return new UserOrderResource($order);
+        }
+    }
 }
