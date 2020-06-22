@@ -27,6 +27,8 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::get('shop/product/featured', 'ShopController@productsFeatured');
     Route::post('carts/{cart}', 'CartController@addProducts');
     Route::post('carts/checkout', 'CartController@checkout');
+    Route::get('order/user', 'UserOrderController@ordersByUser');
+    Route::get('order/user/{order}', 'UserOrderController@orderByUser');
     Route::apiResources([
         'carts' => 'CartController'
     ]);
