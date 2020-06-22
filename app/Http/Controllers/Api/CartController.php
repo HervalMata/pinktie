@@ -8,6 +8,7 @@ use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CartItemCollection;
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
@@ -117,6 +118,12 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @param Cart $cart
+     * @return JsonResponse
+     * @throws \Exception
+     */
     public function checkout(Request $request, Cart $cart)
     {
         if (Auth::guard('api')->check()) {
@@ -144,9 +151,12 @@ class CartController extends Controller
             $name = $request->input('name');
             $address = $request->input('address');
             $number = $request->input('number');
+            $additional = $request->input('additional');
             $cidade_id = $request->input('cidade_id');
+            $province = $request->input('province');
             $country = $request->input('country');
             $cpf = $request->input('cpf');
+            $telefone = $request->input('telefone');
             $mobile = $request->input('mobile');
             $cresit_card_number = $request->input('cresit_card_number');
             $TotalPrice = (float) 0.0;
@@ -167,11 +177,35 @@ class CartController extends Controller
                     ], 400);
                 }
             }
-            /*$paymentGatewayResponse = true;
+            $paymentGatewayResponse = true;
             $transactionID = md5(uniqid(rand(), true));
             if ($paymentGatewayResponse) {
-                $order
-            }*/
+                $order = Order::create([
+                    'products' => json_encode(new CartItemCollection($items)),
+                    'totalPrice' => $TotalPrice,
+                    'name' => $name,
+                    'address' => $address,
+                    'number' => $number,
+                    'additional' => $additional,
+                    'cidade_id' => $cidade_id,
+                    'province' => $province,
+                    'country' => $country,
+                    'cpf' => $cpf,
+                    'telefone' => $telefone,
+                    'mobile' => $mobile,
+                    'user_id' => isset($user_id) ? $user_id : null,
+                    'transactionID' => $transactionID
+                ]);
+                $cart->delete();
+                return response()->json([
+                    'message' => 'Sua Compra foi completada com sucesso, Obrigado por comprar conosco!',
+                    'orderID' => $order->getKey()
+                ], 200);
+            }
+        } else {
+            return response()->json([
+                'message' => 'O Carrinho de compras é inválido'
+            ], 400);
         }
     }
 }
