@@ -30,6 +30,7 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::get('order/user', 'UserOrderController@ordersByUser');
     Route::get('order/user/{order}', 'UserOrderController@orderByUser');
     Route::get('coupon/shop/{coupon}', 'CouponShopController@showCoupon');
+    Route::post('newslwtter/store', 'NewsletterShopController@newsletterStore');
     Route::apiResources([
         'carts' => 'CartController'
     ]);
