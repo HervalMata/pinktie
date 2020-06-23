@@ -31,6 +31,9 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::get('order/user/{order}', 'UserOrderController@orderByUser');
     Route::get('coupon/shop/{coupon}', 'CouponShopController@showCoupon');
     Route::post('newslwtter/store', 'NewsletterShopController@newsletterStore');
+    Route::post('wishlist/store', 'WishlistShopController@wishlistStore');
+    Route::get('wishlist/{wishlist}', 'WishlistShopController@wishlistShow');
+    Route::delete('wishlist/{wishlist}', 'WishlistShopController@wishlistDestroy');
     Route::apiResources([
         'carts' => 'CartController'
     ]);
@@ -77,6 +80,9 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
         ]);
         Route::apiResources([
             'newsletters' => 'NewsletterController'
+        ]);
+        Route::apiResources([
+            'wishlists' => 'WishlistController'
         ]);
     });
 });
