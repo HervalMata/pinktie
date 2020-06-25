@@ -13,3 +13,12 @@ export interface UserProfile {
   phone_number: string;
   has_photo: boolean;
 }
+
+export interface Category {
+  id?:number;
+  category_name: string;
+  readonly slug?: string;
+  active: boolean;
+  readonly created_at?: {date: string};
+  readonly updated_at?: {date: string};
+}

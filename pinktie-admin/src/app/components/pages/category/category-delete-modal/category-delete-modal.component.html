@@ -1,0 +1,10 @@
+<modal (onHide)="hideModal($event)">
+    <h5 modal-title>Excluir Categoria</h5>
+    <div modal-body>
+      Deseja excluir a categoria {{ category?.category_name }}
+    </div>
+    <div modal-footer>
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      <button type="submit" class="btn btn-success" (click)="destroy()" )>Excluir</button>
+    </div>
+</modal>
