@@ -1,0 +1,52 @@
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.product_name.id">{{fieldsOptions.product_name.label}}</label>
+  <input type="text" class="form-control"
+         isInvalid [id]="fieldsOptions.product_name.id" [maxLength]="fieldsOptions.product_name.validationMessage.maxLength"
+         formControlName="product_name">
+  <field-error [field]="form.get('product_name')" [label]="fieldsOptions.product_name.label"
+               [messages]="fieldsOptions.product_name.validationMessage"></field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.product_code.id">{{fieldsOptions.product_code.label}}</label>
+  <input type="text" class="form-control"
+         isInvalid [id]="fieldsOptions.product_code.id"
+         formControlName="product_code">
+  <field-error [field]="form.get('product_code')" [label]="fieldsOptions.product_code.label"
+               [messages]="fieldsOptions.product_code.validationMessage"></field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.description.id">{{fieldsOptions.description.label}}</label>
+  <textarea type="text" class="form-control"
+         isInvalid [id]="fieldsOptions.description.id" [cols]="fieldsOptions.description.validationMessage.cols"
+           [rows]="fieldsOptions.description.validationMessage.rows" formControlName="description"></textarea>
+  <field-error [field]="form.get('description')" [label]="fieldsOptions.description.label"
+               [messages]="fieldsOptions.description.validationMessage"></field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.stock.id">{{fieldsOptions.stock.label}}</label>
+  <input type="text" class="form-control"
+         isInvalid [id]="fieldsOptions.stock.id" [min]="fieldsOptions.stock.validationMessage.min"
+         formControlName="stock">
+  <field-error [field]="form.get('stock')" [label]="fieldsOptions.stock.label"
+               [messages]="fieldsOptions.stock.validationMessage"></field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.price.id">{{fieldsOptions.price.label}}</label>
+  <input type="text" class="form-control"
+         isInvalid [id]="fieldsOptions.price.id" [min]="fieldsOptions.price.validationMessage.min"
+         formControlName="price">
+  <field-error [field]="form.get('price')" [label]="fieldsOptions.price.label"
+               [messages]="fieldsOptions.price.validationMessage"></field-error>
+</div>
+<div class="form-group" [formGroup]="form">
+  <select2 [data]="categoryIdField" [options]="categoryIdField.options"
+           isInvalidControl="form.get('category_id')" class="form-control undo-form-control"
+           (valueChanged)="categoryIdField.updateFormControl($event.value)"></select2>
+  <field-error [field]="form.get('category_id')" [label]="fieldsOptions.category_id.label"
+               [messages]="fieldsOptions.category_id.validationMessage"></field-error>
+</div>
+<div class="form-group form-check" [formGroup]="form">
+  <input type="checkbox" class="form-check-input"
+         [id]="fieldsOptions.active.id" name="active" formControlName="active">
+  <label [for]="fieldsOptions.active.id">Ativa?</label>
+</div>

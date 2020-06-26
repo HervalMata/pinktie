@@ -25,6 +25,15 @@ import { FieldErrorComponent } from './components/bootstrap/field-error/field-er
 import { IsInvalidDirective } from './directives/is-invalid.directive';
 import {NgxPaginationModule} from "ngx-pagination";
 import { SortColumnComponent } from './components/common/sort-column/sort-column.component';
+import { ProductListComponent } from './components/pages/product/product-list/product-list.component';
+import { ProductEditModalComponent } from './components/pages/product/product-edit-modal/product-edit-modal.component';
+import { ProductNewModalComponent } from './components/pages/product/product-new-modal/product-new-modal.component';
+import { ProductDeleteModalComponent } from './components/pages/product/product-delete-modal/product-delete-modal.component';
+import { ProductSearchFormComponent } from './components/pages/product/product-search-form/product-search-form.component';
+import { ProductFormComponent } from './components/pages/product/product-form/product-form.component';
+import { ProductViewModalComponent } from './components/pages/product/product-view-modal/product-view-modal.component';
+import { NumberFormatBrPipe } from './pipes/number-format-br.pipe';
+import {Select2Module} from "ng2-select2";
 
 function jwtFactory(authService: AuthService) {
   return {
@@ -54,23 +63,32 @@ function jwtFactory(authService: AuthService) {
     ListErrorComponent,
     FieldErrorComponent,
     IsInvalidDirective,
-    SortColumnComponent
+    SortColumnComponent,
+    ProductListComponent,
+    ProductEditModalComponent,
+    ProductNewModalComponent,
+    ProductDeleteModalComponent,
+    ProductSearchFormComponent,
+    ProductFormComponent,
+    ProductViewModalComponent,
+    NumberFormatBrPipe
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    JwtModule.forRoot({
-      jwtOptionsProvider: {
-        provide: JWT_OPTIONS,
-        useFactory: jwtFactory,
-        deps: [AuthService]
-      }
-    }),
-    NgxPaginationModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        JwtModule.forRoot({
+            jwtOptionsProvider: {
+                provide: JWT_OPTIONS,
+                useFactory: jwtFactory,
+                deps: [AuthService]
+            }
+        }),
+        NgxPaginationModule,
+        Select2Module
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

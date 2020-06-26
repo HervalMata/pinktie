@@ -147,8 +147,8 @@ class User extends Authenticatable implements JWTSubject
                 'telefone' => $this->telefone,
                 'mobile' => $this->mobile,
                 'cpf' => $this->cpf,
-                'cidade' => $this->cidade->cidade,
-                'estado' => $this->cidade->estado
+                /*'cidade' => $this->cidade->cidade,
+                'estado' => $this->cidade->estado->estado*/
             ]
         ];
     }

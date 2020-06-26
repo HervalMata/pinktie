@@ -49,6 +49,7 @@ class UsersSeeder extends Seeder
                 'address' => $faker->streetAddress,
                 'number' => $faker->randomNumber(),
                 'province' => $faker->region,
+                'cep' => $faker->postcode,
                 'cpf' => $faker->cpf,
                 'mobile' =>$faker->cellphone(true, true),
                 'photo' => $this->getCustomerPhoto(),

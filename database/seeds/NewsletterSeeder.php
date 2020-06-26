@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\NewsLetter;
+use App\Models\Newsletter;
 use Illuminate\Database\Seeder;
 
 class NewsletterSeeder extends Seeder
@@ -12,6 +12,6 @@ class NewsletterSeeder extends Seeder
      */
     public function run()
     {
-        factory(NewsLetter::class, 20)->create();
+        factory(Newsletter::class, 20)->create();
     }
 }

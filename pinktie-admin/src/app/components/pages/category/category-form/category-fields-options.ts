@@ -1,8 +1,8 @@
 import {FieldsOptions} from "../../../../common/fields-options";
 
 const fieldsOptions: FieldsOptions = {
-  name: {
-    id: 'name',
+  category_name: {
+    id: 'category_name',
     label: 'Nome',
     validationMessage: {
       maxLength: 50

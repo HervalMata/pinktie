@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsletterRequest;
 use App\Http\Resources\NewsletterResource;
-use App\Models\NewsLetter;
+use App\Models\Newsletter;
 use Illuminate\Http\Request;
 
 class NewsletterShopController extends Controller

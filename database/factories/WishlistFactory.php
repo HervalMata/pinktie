@@ -5,6 +5,7 @@
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Wishlist;
+use Carbon\Carbon;
 use Faker\Generator as Faker;
 
 $factory->define(Wishlist::class, function (Faker $faker) {
@@ -15,6 +16,8 @@ $factory->define(Wishlist::class, function (Faker $faker) {
     return [
         'user_id' => $user->id,
         'product_id' => $product->id,
-        'quantity' => $faker->numberBetween(1, 3)
+        'quantity' => $faker->numberBetween(1, 3),
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
     ];
 });

@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
   submit() {
     this.authService.login(this.credentials)
       .subscribe((data) => {
-        const token = data.token;
         this.router.navigate(['categories/list'])
       }, error => this.showMessageError = true);
     return false;

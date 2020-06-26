@@ -13,7 +13,7 @@ class CouponSeeder extends Seeder
     public function run()
     {
         factory(Coupon::class, 1)->create([
-            'amouont' => 50,
+            'amount' => 50,
             'amount_type' => 'fixed',
             'status' => 1
         ]);

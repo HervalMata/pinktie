@@ -12,7 +12,9 @@ $factory->define(Coupon::class, function (Faker $faker) {
         'coupon_code' => Str::random(8),
         'amount' => $faker->numberBetween(10, 30),
         'amount_type' => 'Percentage',
-        'expire_date' => Carbon::next(30),
-        'status' => 0
+        'expiry_date' => Carbon::now()->add(30, 'days'),
+        'status' => 0,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
     ];
 });

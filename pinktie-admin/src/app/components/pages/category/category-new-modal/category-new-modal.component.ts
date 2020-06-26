@@ -13,7 +13,7 @@ import fieldsOptions from "../category-form/category-fields-options";
 export class CategoryNewModalComponent implements OnInit {
 
   form: FormGroup;
-  errors: {};
+  errors = {};
 
   @ViewChild(ModalComponent) modal:ModalComponent;
 
@@ -26,9 +26,9 @@ export class CategoryNewModalComponent implements OnInit {
     private categoryHttp: CategoryHttpService,
     private formBuilder: FormBuilder
   ) {
-    const maxLength = fieldsOptions.name.validationMessage.maxlength;
+    const maxLength = fieldsOptions.category_name.validationMessage.maxlength;
     this.form = this.formBuilder.group({
-      name: ['', Validators.required, Validators.maxLength(maxLength)],
+      category_name: ['', Validators.required, Validators.maxLength(maxLength)],
       active: true
     });
   }
@@ -40,14 +40,14 @@ export class CategoryNewModalComponent implements OnInit {
     this.categoryHttp.create(this.form.value)
       .subscribe((category) => {
         this.form.reset({
-          name: '',
+          category_name: '',
           active: true
         });
         this.onSuccess.emit(category);
         this.modal.hide();
       }, responseError => {
         if (responseError.status === 422) {
-          this.errors = responseError.error.errors
+          this.errors = responseError.error.errors;
         }
         this.onError.emit(responseError)
       });

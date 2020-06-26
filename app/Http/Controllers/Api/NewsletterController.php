@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Filters\NewsletterFilter;
 use App\Http\Requests\NewsletterRequest;
 use App\Http\Resources\NewsletterResource;
-use App\Models\NewsLetter;
+use App\Models\Newsletter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

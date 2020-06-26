@@ -8,7 +8,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class CategoryInsertService {
 
-  private _categoryListComponent = CategoryListComponent;
+  private _categoryListComponent: CategoryListComponent;
 
   constructor(private notifyMessage: NotifyMessageService) { }
 

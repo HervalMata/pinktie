@@ -19,6 +19,7 @@ class ProductResource extends JsonResource
         $category_id = $this->category_id;
         $category = Category::find($category_id);
         return [
+            'id' => $this->id,
             'product_name' => $this->product_name,
             'slug' => $this->slug,
             'product_code' => $this->product_code,

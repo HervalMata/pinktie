@@ -14,6 +14,8 @@ export class CategoryEditModalComponent implements OnInit {
 
   form: FormGroup;
   errors: {};
+
+  @Input()
   _categoryId: number;
 
   @ViewChild(ModalComponent) modal:ModalComponent;
@@ -27,9 +29,9 @@ export class CategoryEditModalComponent implements OnInit {
     private categoryHttp: CategoryHttpService,
     private formBuilder: FormBuilder
   ) {
-    const maxLength = fieldsOptions.name.validationMessage.maxlength;
+    //const maxLength = fieldsOptions.category_name.validationMessage.maxlength;
     this.form = this.formBuilder.group({
-      name: ['', Validators.required, Validators.maxLength(maxLength)],
+      category_name: '',
       active: true
     });
   }

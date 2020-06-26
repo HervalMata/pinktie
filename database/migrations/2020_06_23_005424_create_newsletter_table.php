@@ -13,7 +13,7 @@ class CreateNewsletterTable extends Migration
      */
     public function up()
     {
-        Schema::create('newsletter', function (Blueprint $table) {
+        Schema::create('newsletters', function (Blueprint $table) {
             $table->id();
             $table->string('email');
             $table->tinyInteger('status')->default(1);
@@ -28,6 +28,6 @@ class CreateNewsletterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('newsletter');
+        Schema::dropIfExists('newsletters');
     }
 }

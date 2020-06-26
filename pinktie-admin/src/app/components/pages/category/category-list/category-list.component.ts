@@ -16,7 +16,6 @@ import {CategoryDeleteService} from "./category-delete.service";
 export class CategoryListComponent implements OnInit {
 
   categories: Array<Category> = [];
-  page = 1;
   pagination = {
     page: 1,
     totalItems: 0,
@@ -59,6 +58,7 @@ export class CategoryListComponent implements OnInit {
       search: this.searchText
     })
       .subscribe(response => {
+        console.log(response.data);
         this.categories = response.data;
         this.pagination.totalItems = response.meta.total;
       })

@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use Tymon\JWTAuth\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -24,10 +23,10 @@ class AuthController extends Controller
     {
         $this->validateLogin($request);
         $credentials = $this->credentials($request);
-        $token = JWTAuth::attempt($credentials);
+        $token = \JWTAuth::attempt($credentials);
         return $token ? ['token' => $token] :
             response()->json(
-                ['error' => Lang::get('auth.failed')]
+                ['error' => \Lang::get('auth.failed')]
                 , 400);
     }
 

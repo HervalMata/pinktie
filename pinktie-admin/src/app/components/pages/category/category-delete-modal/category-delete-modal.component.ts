@@ -11,8 +11,10 @@ import {Category} from "../../../../model";
 })
 export class CategoryDeleteModalComponent implements OnInit {
 
+  @Input()
   category: Category = null;
 
+  @Input()
   _categoryId: number;
 
   @ViewChild(ModalComponent) modal:ModalComponent;
@@ -43,7 +45,7 @@ export class CategoryDeleteModalComponent implements OnInit {
     this._categoryId = value;
     if (this._categoryId) {
       this.categoryHttp.get(this._categoryId)
-        .subscribe(category => this.category)
+        .subscribe(category => this.category = category);
     }
   }
 

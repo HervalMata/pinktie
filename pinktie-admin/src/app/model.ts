@@ -1,5 +1,5 @@
 export interface User {
-  id?:number;
+  id?: number;
   name: string;
   email: string;
   password?: string;
@@ -10,13 +10,27 @@ export interface User {
 
 export interface UserProfile {
   photo_url: string;
-  phone_number: string;
+  address: string;
   has_photo: boolean;
 }
 
 export interface Category {
-  id?:number;
+  id?: number;
   category_name: string;
+  readonly slug?: string;
+  active: boolean;
+  readonly created_at?: {date: string};
+  readonly updated_at?: {date: string};
+}
+
+export interface Product {
+  id?: number;
+  product_name: string;
+  product_code: string;
+  description: string;
+  stock: number;
+  price: number;
+  category: Category;
   readonly slug?: string;
   active: boolean;
   readonly created_at?: {date: string};
