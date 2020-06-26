@@ -30,11 +30,11 @@ export class ProductNewModalComponent implements OnInit {
     const minStock = fieldsOptions.stock.validationMessage.min;
     const minPrice = fieldsOptions.stock.validationMessage.min;
     this.form = this.formBuilder.group({
-      product_name: ['', Validators.required, Validators.maxLength(maxLength)],
-      product_code: ['', Validators.required],
-      description: ['', Validators.required],
-      stock: [0, Validators.required, Validators.min(minStock)],
-      price: [0, Validators.required, Validators.min(minPrice)],
+      product_name: ['', [Validators.required, Validators.maxLength(maxLength)]],
+      product_code: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      stock: [0, [Validators.required, Validators.min(minStock)]],
+      price: [0, [Validators.required, Validators.min(minPrice)]],
       category_id: ['null', Validators.required],
       active: true
     });

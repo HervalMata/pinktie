@@ -1,0 +1,13 @@
+<div class="form-group" [formGroup]="form">
+  <label [for]="fieldsOptions.material_name.id">{{fieldsOptions.material_name.label}}</label>
+  <input type="text" class="form-control"
+         isInvalid [id]="fieldsOptions.material_name.id" [maxLength]="fieldsOptions.material_name.validationMessage.maxLength"
+         formControlName="material_name">
+  <field-error [field]="form.get('material_name')" [label]="fieldsOptions.material_name.label"
+               [messages]="fieldsOptions.material_name.validationMessage"></field-error>
+</div>
+<div class="form-group form-check" [formGroup]="form">
+  <input type="checkbox" class="form-check-input"
+         [id]="fieldsOptions.active.id" name="active" formControlName="active">
+  <label [for]="fieldsOptions.active.id">Ativa?</label>
+</div>

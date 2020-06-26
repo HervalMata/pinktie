@@ -1,0 +1,12 @@
+<form (submit)="submit()">
+  <modal (onHide)="hideModal($event)">
+    <h5 modal-title>Editar Material - {{ form.get('material_name').value }}</h5>
+    <div modal-body>
+      <material-form [form]="form"></material-form>
+    </div>
+    <div modal-footer>
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      <button type="submit" class="btn btn-success">Editar</button>
+    </div>
+  </modal>
+</form>

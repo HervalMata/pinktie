@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModalComponent} from "../../../bootstrap/modal/modal.component";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ProductHttpService} from "../../../../services/http/product-http.service";
+import fieldsOptions from "../product-form/product-fields-options";
 
 @Component({
   selector: 'product-edit-modal',
@@ -28,13 +29,16 @@ export class ProductEditModalComponent implements OnInit {
     private productHttp: ProductHttpService,
     private formBuilder: FormBuilder
   ) {
+    const maxLength = fieldsOptions.product_name.validationMessage.maxlength;
+    const minStock = fieldsOptions.stock.validationMessage.min;
+    const minPrice = fieldsOptions.stock.validationMessage.min;
     this.form = this.formBuilder.group({
-      product_name: '',
-      product_code: '',
-      description: '',
-      stock: 0,
-      price: 0,
-      category_id: null,
+      product_name: ['', [Validators.required, Validators.maxLength(maxLength)]],
+      product_code: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      stock: [0, [Validators.required, Validators.min(minStock)]],
+      price: [0, [Validators.required, Validators.min(minPrice)]],
+      category_id: ['', Validators.required],
       active: true
     });
   }

@@ -34,6 +34,18 @@ import { ProductFormComponent } from './components/pages/product/product-form/pr
 import { ProductViewModalComponent } from './components/pages/product/product-view-modal/product-view-modal.component';
 import { NumberFormatBrPipe } from './pipes/number-format-br.pipe';
 import {Select2Module} from "ng2-select2";
+import { ColorDeleteModalComponent } from './components/pages/color/color-delete-modal/color-delete-modal.component';
+import { ColorEditModalComponent } from './components/pages/color/color-edit-modal/color-edit-modal.component';
+import { ColorNewModalComponent } from './components/pages/color/color-new-modal/color-new-modal.component';
+import { ColorListComponent } from './components/pages/color/color-list/color-list.component';
+import { ColorFormComponent } from './components/pages/color/color-form/color-form.component';
+import { ColorSearchFormComponent } from './components/pages/color/color-search-form/color-search-form.component';
+import { MaterialDeleteModalComponent } from './components/pages/material/material-delete-modal/material-delete-modal.component';
+import { MaterialEditModalComponent } from './components/pages/material/material-edit-modal/material-edit-modal.component';
+import { MaterialNewModalComponent } from './components/pages/material/material-new-modal/material-new-modal.component';
+import { MaterialListComponent } from './components/pages/material/material-list/material-list.component';
+import { MaterialFormComponent } from './components/pages/material/material-form/material-form.component';
+import { MaterialSearchFormComponent } from './components/pages/material/material-search-form/material-search-form.component';
 
 function jwtFactory(authService: AuthService) {
   return {
@@ -71,7 +83,19 @@ function jwtFactory(authService: AuthService) {
     ProductSearchFormComponent,
     ProductFormComponent,
     ProductViewModalComponent,
-    NumberFormatBrPipe
+    NumberFormatBrPipe,
+    ColorDeleteModalComponent,
+    ColorEditModalComponent,
+    ColorNewModalComponent,
+    ColorListComponent,
+    ColorFormComponent,
+    ColorSearchFormComponent,
+    MaterialDeleteModalComponent,
+    MaterialEditModalComponent,
+    MaterialNewModalComponent,
+    MaterialListComponent,
+    MaterialFormComponent,
+    MaterialSearchFormComponent
   ],
     imports: [
         BrowserModule,

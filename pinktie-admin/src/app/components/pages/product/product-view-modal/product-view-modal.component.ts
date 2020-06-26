@@ -20,7 +20,7 @@ export class ProductViewModalComponent implements OnInit {
     price: 0,
     active: true,
     // @ts-ignore
-    category: Category
+    category_id: null
   };
 
   @Input()

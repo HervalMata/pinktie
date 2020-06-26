@@ -36,3 +36,21 @@ export interface Product {
   readonly created_at?: {date: string};
   readonly updated_at?: {date: string};
 }
+
+export interface Color {
+  id?: number;
+  color_name: string;
+  readonly slug?: string;
+  active: boolean;
+  readonly created_at?: {date: string};
+  readonly updated_at?: {date: string};
+}
+
+export interface Material {
+  id?: number;
+  material_name: string;
+  readonly slug?: string;
+  active: boolean;
+  readonly created_at?: {date: string};
+  readonly updated_at?: {date: string};
+}
