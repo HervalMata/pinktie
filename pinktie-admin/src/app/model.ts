@@ -59,3 +59,8 @@ export interface ProductColor {
   product: Product;
   colors: Color[];
 }
+
+export interface ProductMaterial {
+  product: Product;
+  materials: Material[];
+}

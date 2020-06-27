@@ -62,7 +62,7 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
         ]);
         Route::patch('materials/{material}/restore', 'MaterialController@restore');
         Route::resource(
-            'product.materials' ,'ProductMaterialController',
+            'products.materials' ,'ProductMaterialController',
             ['only' => ['index', 'store', 'destroy']]
         );
         Route::apiResources([

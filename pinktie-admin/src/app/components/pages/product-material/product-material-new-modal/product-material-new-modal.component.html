@@ -1,0 +1,9 @@
+<form class="form-inline" (submit)="submit()">
+  <div class="col-auto">
+    <label for="materials[]"><b>Materiais</b></label>
+    <select class="form-control" name="materials[]" id="materials[]" multiple [(ngModel)]="materialsId">
+      <option *ngFor="let material of materials" [ngValue]="material.id">{{material.material_name}}</option>
+    </select>
+  </div>
+  <button class="btn btn-success" type="submit">Incluir Materiais</button>
+</form>

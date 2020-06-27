@@ -48,6 +48,8 @@ import { MaterialFormComponent } from './components/pages/material/material-form
 import { MaterialSearchFormComponent } from './components/pages/material/material-search-form/material-search-form.component';
 import { ProductColorListComponent } from './components/pages/product-color/product-color-list/product-color-list.component';
 import { ProductColorNewModalComponent } from './components/pages/product-color/product-color-new-modal/product-color-new-modal.component';
+import { ProductMaterialListComponent } from './components/pages/product-material/product-material-list/product-material-list.component';
+import { ProductMaterialNewModalComponent } from './components/pages/product-material/product-material-new-modal/product-material-new-modal.component';
 
 function jwtFactory(authService: AuthService) {
   return {
@@ -99,7 +101,9 @@ function jwtFactory(authService: AuthService) {
     MaterialFormComponent,
     MaterialSearchFormComponent,
     ProductColorListComponent,
-    ProductColorNewModalComponent
+    ProductColorNewModalComponent,
+    ProductMaterialListComponent,
+    ProductMaterialNewModalComponent
   ],
     imports: [
         BrowserModule,

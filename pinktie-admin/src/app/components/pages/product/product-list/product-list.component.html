@@ -12,11 +12,11 @@
     </tr>
     <tr>
       <th style="width: 10%" [sortColumn]="sortColumn" columnName="product_code" (onSort)="sort($event)">Código</th>
-      <th style="width: 40%" [sortColumn]="sortColumn" columnName="product_name" (onSort)="sort($event)">Nome</th>
+      <th style="width: 35%" [sortColumn]="sortColumn" columnName="product_name" (onSort)="sort($event)">Nome</th>
       <th style="width: 10%" [sortColumn]="sortColumn" columnName="price" (onSort)="sort($event)">Preço</th>
-      <th style="width: 15%">Ativa?</th>
+      <th style="width: 10%">Ativa?</th>
       <th style="width: 15%" [sortColumn]="sortColumn" columnName="created_at" (onSort)="sort($event)">Criado Em</th>
-      <th style="width: 10%">Ações</th>
+      <th style="width: 20%">Ações</th>
     </tr>
     </thead>
     <tbody>
@@ -41,6 +41,10 @@
         |
         <a title="Cores" href="javascript:void(0)" [routerLink]="['/products', product.id, 'colors', 'list']">
           <i class="fas fa-paint-brush"></i>
+        </a>
+        |
+        <a title="Materiais" href="javascript:void(0)" [routerLink]="['/products', product.id, 'materials', 'list']">
+          <i class="fa fa-product-hunt"></i>
         </a>
       </td>
     </tr>

@@ -7,6 +7,7 @@ import {ProductListComponent} from "../components/pages/product/product-list/pro
 import {ColorListComponent} from "../components/pages/color/color-list/color-list.component";
 import {MaterialListComponent} from "../components/pages/material/material-list/material-list.component";
 import {ProductColorListComponent} from "../components/pages/product-color/product-color-list/product-color-list.component";
+import {ProductMaterialListComponent} from "../components/pages/product-material/product-material-list/product-material-list.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'colors/list', component: ColorListComponent, canActivate: [AuthGuard]},
   {path: 'materials/list', component: MaterialListComponent, canActivate: [AuthGuard]},
   {path: 'products/:product/colors/list', component: ProductColorListComponent, canActivate: [AuthGuard]},
+  {path: 'products/:product/materials/list', component: ProductMaterialListComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ]
 
