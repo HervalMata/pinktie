@@ -54,3 +54,8 @@ export interface Material {
   readonly created_at?: {date: string};
   readonly updated_at?: {date: string};
 }
+
+export interface ProductColor {
+  product: Product;
+  colors: Color[];
+}

@@ -38,6 +38,10 @@
         <a class="alert-danger" href="javascript:void(0)" (click)="productDeleteService.showModalDelete(product.id)">
           <i class="fas fa-trash-alt"></i>
         </a>
+        |
+        <a title="Cores" href="javascript:void(0)" [routerLink]="['/products', product.id, 'colors', 'list']">
+          <i class="fas fa-paint-brush"></i>
+        </a>
       </td>
     </tr>
     </tbody>

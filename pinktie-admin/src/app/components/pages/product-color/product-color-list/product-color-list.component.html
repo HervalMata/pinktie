@@ -1,0 +1,30 @@
+<div class="row">
+  <h1>Cores do Produto {{ product?.product_name }}</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <td colspan="5">
+        <product-color-new-modal [productId]="productId" [productColor]="productColor" (onSuccess)="onInsertSuccess($event)" (onError)="onInsertError($event)"></product-color-new-modal>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 60%">Nome</th>
+      <th style="width: 15%">Ativa?</th>
+      <th style="width: 15%">Criado Em</th>
+      <th style="width: 10%">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let color of productColor?.colors">
+      <td>{{ color.color_name }}</td>
+      <td><i class='fas' [ngClass]="{'fa-check': color.active, 'fa-times': !color.active }"></i> </td>
+      <td>{{ color.created_at | date: 'dd/MM/yyyy' }}</td>
+      <td>
+        <a class="alert-danger" href="javascript:void(0)">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

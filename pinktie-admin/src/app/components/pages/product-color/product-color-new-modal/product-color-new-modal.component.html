@@ -1,0 +1,9 @@
+<form class="form-inline" (submit)="submit()">
+  <div class="col-auto">
+    <label for="colors[]"><b>Cores</b></label>
+    <select class="form-control" name="colors[]" id="colors[]" multiple [(ngModel)]="colorsId">
+      <option *ngFor="let color of colors" [ngValue]="color.id">{{color.color_name}}</option>
+    </select>
+  </div>
+  <button class="btn btn-success" type="submit">Incluir Cores</button>
+</form>
