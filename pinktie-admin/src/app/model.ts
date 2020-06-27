@@ -64,3 +64,11 @@ export interface ProductMaterial {
   product: Product;
   materials: Material[];
 }
+
+export interface ProductPhoto {
+  id?: number;
+  photo_url: string;
+  product?: Product;
+  readonly created_at?: {date: string};
+  readonly updated_at?: {date: string};
+}

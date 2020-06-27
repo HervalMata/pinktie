@@ -50,6 +50,10 @@ import { ProductColorListComponent } from './components/pages/product-color/prod
 import { ProductColorNewModalComponent } from './components/pages/product-color/product-color-new-modal/product-color-new-modal.component';
 import { ProductMaterialListComponent } from './components/pages/product-material/product-material-list/product-material-list.component';
 import { ProductMaterialNewModalComponent } from './components/pages/product-material/product-material-new-modal/product-material-new-modal.component';
+import { ProductPhotoEditModalComponent } from './components/pages/product-photo/product-photo-edit-modal/product-photo-edit-modal.component';
+import { ProductPhotoUploadComponent } from './components/pages/product-photo/product-photo-upload/product-photo-upload.component';
+import { ProductPhotoManagerComponent } from './components/pages/product-photo/product-photo-manager/product-photo-manager.component';
+import { ProductPhotoDeleteModalComponent } from './components/pages/product-photo/product-photo-delete-modal/product-photo-delete-modal.component';
 
 function jwtFactory(authService: AuthService) {
   return {
@@ -103,7 +107,11 @@ function jwtFactory(authService: AuthService) {
     ProductColorListComponent,
     ProductColorNewModalComponent,
     ProductMaterialListComponent,
-    ProductMaterialNewModalComponent
+    ProductMaterialNewModalComponent,
+    ProductPhotoEditModalComponent,
+    ProductPhotoUploadComponent,
+    ProductPhotoManagerComponent,
+    ProductPhotoDeleteModalComponent
   ],
     imports: [
         BrowserModule,
