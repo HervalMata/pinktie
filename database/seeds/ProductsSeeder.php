@@ -5,9 +5,15 @@ use App\Models\Color;
 use App\Models\Material;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class ProductsSeeder extends Seeder
 {
+    private $allFakerPhotos;
+    private $fakerPhotosPath = 'app/faker/product_photos';
+
     /**
      * Run the database seeds.
      *
@@ -17,9 +23,14 @@ class ProductsSeeder extends Seeder
     {
         $colors = Color::all();
         $materials = Material::all();
+        $this->allFakerPhotos = $this->getFakerPhotos();
+        $this->deleteAllPhotosProductsPath();
         factory(Product::class, 100)
-            ->create()
+            ->make()
             ->each(function (Product $product) use ($colors, $materials) {
+                $product = Product::createWithPhoto($product->toArray() + [
+                        'photo' => $this->getUploadedFile()
+                    ]);
                 for ($i=1; $i<4; $i++){
                     $colorId = $colors->random()->id;
                     $materialId = $materials->random()->id;
@@ -27,5 +38,34 @@ class ProductsSeeder extends Seeder
                     $product->materials()->attach($materialId);
                 }
             });
+    }
+
+    /**
+     * @return Collection
+     */
+    private function getFakerPhotos() : Collection
+    {
+        $path = storage_path($this->fakerPhotosPath);
+        return collect(\File::allFiles($path));
+    }
+
+    /**
+     *
+     */
+    private function deleteAllPhotosProductsPath()
+    {
+        $path = Product::PRODUCTS_PATH;
+        \File::deleteDirectory(storage_path($path), true);
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    private function getUploadedFile() : UploadedFile
+    {
+        $photoFile = $this->allFakerPhotos->random();
+        $uploadFile = new UploadedFile($photoFile->getRealPath(), Str::random(16) . '.' . $photoFile->getExtension());
+        //ProductPhoto::uploadFiles($product_id, [$uploadFile]);
+        return $uploadFile;
     }
 }

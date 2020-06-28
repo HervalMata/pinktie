@@ -21,7 +21,10 @@ Route::group(['namespace' => 'Api', 'as' => 'api.'], function () {
     Route::name('login')->post('login', 'AuthController@login');
     Route::name('refresh')->post('refresh', 'AuthController@refresh');
     Route::get('shop/category/{category}', 'ShopController@productsByCategory');
+    Route::get('shop/category', 'ShopController@categoriesAll');
     Route::get('shop', 'ShopController@productsListing');
+    Route::get('shop/1', 'ShopController@productsListing1');
+    Route::get('shop/2', 'ShopController@productsListing2');
     Route::get('shop/{product}', 'ShopController@productDetail');
     Route::get('shop/product/category/{category}', 'ShopController@productsRecommended');
     Route::get('shop/product/featured', 'ShopController@productsFeatured');

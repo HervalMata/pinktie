@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
@@ -19,7 +20,29 @@ class ShopController extends Controller
     {
         $products = Product::with('categories')->where('active','=', true)
             ->where('stock', '>', 0)
-            ->get();
+            ->take(4)->get();
+        return ProductResource::collection($products);
+    }
+
+    /**
+     * @return AnonymousResourceCollection
+     */
+    public function productsListing1()
+    {
+        $products = Product::with('categories')->where('active','=', true)
+            ->where('stock', '>', 0)
+            ->skip(4)->take(4)->get();
+        return ProductResource::collection($products);
+    }
+
+    /**
+     * @return AnonymousResourceCollection
+     */
+    public function productsListing2()
+    {
+        $products = Product::with('categories')->where('active','=', true)
+            ->where('stock', '>', 0)
+            ->skip(8)->take(4)->get();
         return ProductResource::collection($products);
     }
 
@@ -71,5 +94,14 @@ class ShopController extends Controller
             ->where('stock', '>', 0)->where('featured', '=', true)
             ->take(5)->get();
         return ProductResource::collection($products);
+    }
+
+    /**
+     * @return AnonymousResourceCollection
+     */
+    public function categoriesALL()
+    {
+        $categories = Category::where('active', true)->take(4)->get();
+        return CategoryResource::collection($categories);
     }
 }

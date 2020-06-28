@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock')->default(1);
             $table->decimal('price', 12, 2);
             $table->boolean('featured');
+            $table->string('photo')->default('');
             $table->boolean('active')->default(1);
             $table->unsignedBigInteger('category_id');
             $table->softDeletes();
