@@ -10,15 +10,14 @@ import {map} from "rxjs/operators";
 })
 export class ProductPhotoHttpService {
 
-  private baseApi = `${environment.api.url}`;
+  private baseApi = environment.api.url;
   private token = window.localStorage.getItem('token');
 
   constructor(private http: HttpClient) { }
 
-  list(productId: number) : Observable<{product: Product, photos: ProductPhoto}> {
-    return this.http.get<{data: any}>(this.getBaseUrl(productId), {headers: {
-        'Authorization': `Bearer ${this.token}`
-      }}).pipe(map(response => response.data));
+  list(productId: number) : Observable<{product: Product, photos: ProductPhoto[]}> {
+    return this.http.get<{data: any}>(this.getBaseUrl(productId))
+      .pipe(map(response => response.data));
   }
 
   create(productId: number, files: FileList) : Observable<{product: Product, photos: ProductPhoto}> {
@@ -47,7 +46,7 @@ export class ProductPhotoHttpService {
   private getBaseUrl(productId: number, photoId: number = null) : string {
     let baseUrl = `${this.baseApi}/products/${productId}/photos`;
     if (photoId) {
-      baseUrl == `/${photoId}`;
+      baseUrl += `/${photoId}`;
     }
     return baseUrl;
   }

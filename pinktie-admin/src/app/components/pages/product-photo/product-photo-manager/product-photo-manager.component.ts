@@ -1,7 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Product, ProductPhoto} from "../../../../model";
-import {ProductEditModalComponent} from "../../product/product-edit-modal/product-edit-modal.component";
-import {ProductDeleteModalComponent} from "../../product/product-delete-modal/product-delete-modal.component";
 import {ProductPhotoEditModalComponent} from "../product-photo-edit-modal/product-photo-edit-modal.component";
 import {ProductPhotoDeleteModalComponent} from "../product-photo-delete-modal/product-photo-delete-modal.component";
 import {ProductPhotoHttpService} from "../../../../services/http/product-photo-http.service";
@@ -47,7 +45,6 @@ export class ProductPhotoManagerComponent implements OnInit {
   getPhotos() {
     this.productPhotoHttp.list(this.productId)
       .subscribe(data => {
-        // @ts-ignore
         this.photos = data.photos;
         this.product = data.product;
       })

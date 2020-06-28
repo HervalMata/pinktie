@@ -54,6 +54,13 @@ import { ProductPhotoEditModalComponent } from './components/pages/product-photo
 import { ProductPhotoUploadComponent } from './components/pages/product-photo/product-photo-upload/product-photo-upload.component';
 import { ProductPhotoManagerComponent } from './components/pages/product-photo/product-photo-manager/product-photo-manager.component';
 import { ProductPhotoDeleteModalComponent } from './components/pages/product-photo/product-photo-delete-modal/product-photo-delete-modal.component';
+import { UserListComponent } from './components/pages/user/user-list/user-list.component';
+import { UserEditModalComponent } from './components/pages/user/user-edit-modal/user-edit-modal.component';
+import { UserNewModalComponent } from './components/pages/user/user-new-modal/user-new-modal.component';
+import { UserDeleteModalComponent } from './components/pages/user/user-delete-modal/user-delete-modal.component';
+import { UserProfileComponent } from './components/pages/user/user-profile/user-profile.component';
+import { UserFormComponent } from './components/pages/user/user-form/user-form.component';
+import { UserSearchFormComponent } from './components/pages/user/user-search-form/user-search-form.component';
 
 function jwtFactory(authService: AuthService) {
   return {
@@ -111,7 +118,14 @@ function jwtFactory(authService: AuthService) {
     ProductPhotoEditModalComponent,
     ProductPhotoUploadComponent,
     ProductPhotoManagerComponent,
-    ProductPhotoDeleteModalComponent
+    ProductPhotoDeleteModalComponent,
+    UserListComponent,
+    UserEditModalComponent,
+    UserNewModalComponent,
+    UserDeleteModalComponent,
+    UserProfileComponent,
+    UserFormComponent,
+    UserSearchFormComponent
   ],
     imports: [
         BrowserModule,

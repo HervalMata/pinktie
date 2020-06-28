@@ -87,7 +87,7 @@ class UserProfile extends Model
     /**
      * @return string
      */
-    public function getPhotpUrlBaseAttribute()
+    public function getPhotoUrlBaseAttribute()
     {
         $path = self::photoDir();
         return $this->photo ? "{$path}/{$this->photo}" : 'https://secure.gravatar.com/avatar/8d0153955da67e7593b0cca28e3e4d75.jpg?s=150&r=g&d=mm';

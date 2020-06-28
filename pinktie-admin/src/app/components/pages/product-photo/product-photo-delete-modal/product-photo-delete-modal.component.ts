@@ -11,7 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ProductPhotoDeleteModalComponent implements OnInit {
 
-  errors: {};
+  errors = {};
 
   productId: number;
 
@@ -55,8 +55,8 @@ export class ProductPhotoDeleteModalComponent implements OnInit {
     this.modal.show();
   }
 
-  hideModal($event: Event) {
-    console.log($event);
+  hideModal() {
+    this.modal.hide();
   }
 
   showErrors() {

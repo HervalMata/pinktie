@@ -20,7 +20,7 @@ class ProductPhotoController extends Controller
      */
     public function index(Product $product)
     {
-        return new ProductPhotoCollection($product->photos(), $product);
+        return new ProductPhotoCollection($product->photos, $product);
     }
 
     /**

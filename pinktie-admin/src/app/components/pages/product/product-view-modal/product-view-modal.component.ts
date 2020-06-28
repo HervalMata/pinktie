@@ -11,6 +11,7 @@ import {ProductHttpService} from "../../../../services/http/product-http.service
 })
 export class ProductViewModalComponent implements OnInit {
 
+  category: Category;
 
   product: Product = {
     product_name: '',
@@ -20,7 +21,7 @@ export class ProductViewModalComponent implements OnInit {
     price: 0,
     active: true,
     // @ts-ignore
-    category_id: null
+    category:  ''
   };
 
   @Input()
